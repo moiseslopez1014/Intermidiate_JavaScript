@@ -41,6 +41,8 @@ function ex3CallBoxes(nSquares) { //Recibe numero cuadrados
 anchorElement.appendChild(ex3Container); //inserta ex3Container dentro de div principal.
 }
 
-
-
 ex3CallBoxes(10);
+
+//Ejercicio 4 Crea un elemento “card”
+console.log('Ejercicio 4. Crea un elemento “card”');
+

@@ -26,3 +26,37 @@
     height: 25px;
     background-color: #d73b3b;
 }
+
+/*Estilos para el ejercicio 4*/ 
+
+.ex4Container {
+    width: 600px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: black;
+    color: azure;
+    border: 3px dashed gray;
+    border-radius: 15px;
+    padding: 20px;
+    gap: 20px;
+}
+
+.ex4Container__Poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ex4Container__Poster img {
+    width: 100%;
+}
+
+.itemsList {
+  list-style-type: square;   /* Tipo de viñeta (puede ser circle, square, etc.) */
+  padding-left: 30px;     /* Espacio a la izquierda */
+}
+
+.itemsList li {
+  text-indent: -0.5em;     /* Empuja la primera línea hacia la izquierda */
+  padding-left: 0.5em;     /* Vuelve a colocar el texto */
+}
