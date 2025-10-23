@@ -49,14 +49,49 @@
 
 .ex4Container__Poster img {
     width: 100%;
+    border-radius: 15px;
 }
 
-.itemsList {
-  list-style-type: square;   /* Tipo de viñeta (puede ser circle, square, etc.) */
-  padding-left: 30px;     /* Espacio a la izquierda */
+
+/*Para el ejercicio 6*/
+
+.ex6style {
+    width: 300px;
+    height: 200px;
+    border: 1px solid grey;
 }
 
-.itemsList li {
-  text-indent: -0.5em;     /* Empuja la primera línea hacia la izquierda */
-  padding-left: 0.5em;     /* Vuelve a colocar el texto */
+.ex8Boton {
+    margin: 100px;
+    width: 100px;
+    height: 35px;
+    background-color: blanchedalmond;
+    color: salmon;
+    border-radius: 15px;
+}
+
+.ex3Container__box10 {
+    width: 100px;
+    height: 100px;
+    background-color: #3b78d7;
+}
+
+/*EStilos para el ejercicio 13*/
+
+.divForDrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 180px;
+    background-color: beige;
+    border: 2px solid blanchedalmond;
+    border-radius: 8px;
+}
+
+.divForDrag {
+    width: 100px;
+    background-color: burlywood;
+    border: 2px solid blanchedalmond;
+    border-radius: 8px;
 }
