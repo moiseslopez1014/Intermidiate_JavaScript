@@ -708,3 +708,118 @@ fetch('https://jsonplaceholder.typicode.com/posts/1', {
   console.error(err.message);
 });
 
+
+//Async Await
+
+//Ejercicio 25 Get con AsyncAwait (URL modificada para que de error para ejercicio 26)
+
+async function ex25GET() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/postssss');
+    if (!res.ok) throw new Error(`Error HTTPS: ${res.status}`);
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err.message);
+  }
+}
+ex25GET();
+
+//Ejercicio 27 POST con Async Await
+
+const datos27 = JSON.stringify({
+    "userId": 1,
+    "title": "Async Await",
+    "body": "in the java, the mighty Java... (8)"
+  });
+
+async function ex27POST() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: datos27,
+    });
+    if (!res.ok) throw new Error('Error HTTPS: ', res.status);
+    const data = await res.json();
+    console.log('EJERCICIO 27 DATOS:',data);
+  } catch (err) {
+    console.error(err.message);
+  }
+}
+
+ex27POST();
+
+//Ejercicio 28 PUT con Async Await
+
+async function ex28PUT() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        "userId": 33,
+        "title": "PUT",
+        "body": "in the java, the mighty Java... (8)",
+        "description": "testing new property",
+      }),
+    });
+    if (!res.ok) throw new Error('Error EX28HTTPS: ', res.status);
+    const data = await res.json();
+    console.log('EX28 DATA PUT: ', data);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+ex28PUT();
+
+//Ejercicio 29 PATCH con Async Await
+
+async function ex29PATCH() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        body: 'testing new body using PATCH',
+      }),
+    });
+    if (!res.ok) throw new Error('EX29ERROR: ', res.status);
+    const data = await res.json();
+    console.log('EX29 DATA PATCH: ', data);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+ex29PATCH();
+
+// Ejercicio 30 DELETE con Async Await
+
+async function ex30DELETE() {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    if (!res.ok) throw new Error('EX30 ERROR: ', res.status);
+    console.log('EX30 DELETE OK: ', res.status);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+ex30DELETE();
+
