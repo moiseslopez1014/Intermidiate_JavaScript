@@ -1,6 +1,7 @@
-import './style.css'
+//import './style.css'
 
-export const anchorElement = document.querySelector("#app");
+const anchorElement = document.querySelector("#app");
+const separacion = document.createElement('hr');
 
 // Exercise 1 Acceso al DOM
 console.log('// Exercise 1 Acceso al DOM');
@@ -13,6 +14,7 @@ console.log(ex1MismaClase);
 
 //Exercise 2 Cambiar el contenido de un elemento del DOM
 console.log('//Exercise 2 Cambiar el contenido de un elemento del DOM');
+anchorElement.appendChild(separacion);
 
   const ex2ContenedorLosCojones = document.querySelectorAll('.ex2Container'); //Guarda el const de Todos los elementos con tal clase
   
@@ -28,6 +30,7 @@ console.log('//Exercise 2 Cambiar el contenido de un elemento del DOM');
 
 //Ejercicio 3 Crea una Web en HTML
 console.log('//Ejercicio 3 Crea una Web en HTML');
+anchorElement.appendChild(separacion);
 
 //const ex3Container = document.querySelector('.ex3Container'); //Selector de elemento en HTML
 const ex3Container = document.createElement('div');
@@ -46,6 +49,7 @@ ex3CallBoxes(7);
 
 //Ejercicio 4 Crea un elemento “card”
 console.log('Ejercicio 4. Crea un elemento “card”');
+anchorElement.appendChild(separacion);
 
 const movie = {
   title: 'The Dark Knight',
@@ -98,6 +102,7 @@ createMovieCard();
 
 //Ejercicio 5. Cambiar el texto interno del shadow DOM
 console.log('//Ejercicio 5. Cambiar el texto interno del shadow DOM');
+anchorElement.appendChild(separacion);
 
 
 const ex5Element = document.createElement('div');
@@ -120,6 +125,7 @@ p {
 
 //Ejercicio 6 Mostrar coordenadas del raton en tiempo real
 console.log('//Ejercicio 6 Mostrar coordenadas del raton en tiempo real');
+anchorElement.appendChild(separacion);
 
 const ex6Element = document.createElement('div');
 ex6Element.setAttribute('id', 'ex6');
@@ -135,6 +141,7 @@ ex6Element.addEventListener('mousemove', (mouses) => {
 
 //7 Extraer valor de un input
 console.log('//7 Extraer valor de un input');
+anchorElement.appendChild(separacion);
 
 const ex7Element = document.createElement('input');
 ex7Element.setAttribute('id', 'input-test');
@@ -147,6 +154,7 @@ ex7Element.addEventListener('keyup', () => {
 
 //8 Ejercicio 8 
 console.log('//8 Ejercicio 8 Creando un contador de clicks');
+anchorElement.appendChild(separacion);
 
 const ex8Button = document.createElement('button');
 ex8Button.className = 'ex8Boton';
@@ -171,6 +179,7 @@ ex8ButtonReset.addEventListener('click', () => {
 
 //9 Detectar tecla presionada
 console.log('//9 Detectar tecla presionada');
+anchorElement.appendChild(separacion);
 
 document.addEventListener('keydown', (pressed) => {
   console.log(`La tecla pulsada: ${pressed.key}`);
@@ -178,6 +187,7 @@ document.addEventListener('keydown', (pressed) => {
 
 //10 Ejercicio 10 Animar un cuadrado
 console.log('//10 Ejercicio 10 Animar un cuadrado');
+anchorElement.appendChild(separacion);
 
 const ex10Square = document.createElement('div');
 ex10Square.className = 'ex3Container__box10';
@@ -185,18 +195,23 @@ anchorElement.appendChild(ex10Square);
 
 function animarCuadrado(elemento, tiempoInicio){
   let tiempoActual = performance.now();
-  let progreso = (tiempoActual - tiempoInicio) / 1000;
+  let progreso = (tiempoActual - tiempoInicio) / 2000;
 
   if (progreso < 1) {
-    elemento.style.transform = `translateX(${progreso * 100}px)`;
+    let x;
+    if (progreso < 0.5) {
+      x = progreso * 2 * 100;
+    }
+    else{
+      x = (1 - (progreso - 0.5) * 2) * 100;
+    }
+
+    elemento.style.transform = `translateX(${x}px)`;
     requestAnimationFrame(() => animarCuadrado(elemento, tiempoInicio));
   }
-  //else if (progreso >= 2) {
-    //elemento.style.transform = `translateX(${progreso * 100}px)`;
-    //requestAnimationFrame(() => animarCuadrado(elemento, tiempoInicio));
-  //}
+
   else { 
-    elemento.style.transform = 'translateX(100px)';
+    elemento.style.transform = 'translateX(0px)';
   }
 }
 
@@ -204,11 +219,66 @@ ex10Square.addEventListener('click', () => {
   requestAnimationFrame((tiempoInicio) => animarCuadrado(ex10Square, tiempoInicio))
 })
 
+//11 cambiar color transicion
+console.log('//11 cambiar color transicion');
+const separacion11 = document.createElement('hr');
+anchorElement.appendChild(separacion11);
 
+
+const ex11Div = document.createElement('div');
+
+ex11Div.className = 'ex3Container__box10'
+anchorElement.appendChild(ex11Div);
+
+const botonTransicion = document.createElement('button');
+botonTransicion.setAttribute('id', 'botonTransicion');
+botonTransicion.textContent = 'Transicionar color';
+anchorElement.appendChild(botonTransicion);
+
+let colorAzul = 'blue';
+let colorAmarillo = 'yellow'
+
+function ex11Transition() {
+  ex11Div.style.transition = 'background-color 0.5s, transform 0.5s';
+  if (ex11Div.style.backgroundColor === colorAzul) {
+  ex11Div.style.backgroundColor = colorAmarillo; }
+  else {ex11Div.style.backgroundColor = colorAzul}
+}
+
+botonTransicion.addEventListener('click', ex11Transition);
+
+
+//12 Rotar 360
+console.log('//12 rotar 360');
+const separacion12 = document.createElement('hr');
+anchorElement.appendChild(separacion12);
+
+const ex12Div = document.createElement('div');
+ex12Div.className = 'ex3Container__box10'
+anchorElement.appendChild(ex12Div);
+
+function ex12Rotate (element, timeStart) {
+  const timeNow = performance.now();
+  const progress = (timeNow - timeStart) / 1000;
+
+  if (progress < 1) {
+    element.style.transform = `rotate(${progress*360}deg)`;
+    requestAnimationFrame(() => ex12Rotate(element, timeStart));
+  }
+  else {
+    element.style.transform = `rotate(360deg)`;
+  }
+}
+
+ex12Div.addEventListener('click', () => {
+  requestAnimationFrame((timeStart) => ex12Rotate(ex12Div, timeStart));
+});
 
 
 //Ejercicio 13 Generar un  Drag and Drop
 console.log('//Ejercicio 13 Generar un  Drag and Drop');
+anchorElement.appendChild(separacion);
+
 
 const ex13Div = document.createElement('div');
 
@@ -248,3 +318,393 @@ divDrop.addEventListener('drop', (event) => {
   divDrop.textContent = `${datosStringifados.valor1}, \n ${datosStringifados.valor2}, \n ${datosStringifados.valor3}, \n ${datosStringifados.valor4}, \n ${datosStringifados.valor5}.`
   console.log(datosStringifados);
 });
+
+
+//Ejercicios 14 Escope local y global
+anchorElement.appendChild(separacion);
+console.log("//Ejercicios 14 Escope local y global");
+
+const ex14Div = document.createElement("div");
+anchorElement.appendChild(ex14Div);
+
+const constScopeGlobal = "Const Padre";
+var varScopeGlobal = "Var Padre";
+let letScopeGlobal = "Let Padre";
+
+console.log(constScopeGlobal,varScopeGlobal,letScopeGlobal);
+
+for (let i = 0; i <= 0; i++) {
+  const constScopeBucle = 'Const nieto';
+  var varScopeBucle = 'Var nieto';
+  let letScopeBucle = 'Let nieto';
+  console.log(constScopeBucle,varScopeBucle,letScopeBucle);
+  console.log(constScopeGlobal,letScopeGlobal,varScopeGlobal);
+}
+
+function pruebaScope() {
+  const constScopeFn = 'Const hijo';
+  var varScopeFn = 'Var hijo';
+  let letScopeFn = 'Let hijo';
+  console.log(constScopeFn,varScopeFn,letScopeFn);
+    console.log(constScopeGlobal,letScopeGlobal,varScopeGlobal);
+
+}
+pruebaScope();
+
+console.log(varScopeBucle);
+//console.log(letScopeBucle);
+//console.log(varScopeFn);
+//console.log(constScopeBucle);
+
+
+// Ejercicio 15 setTimeOut
+console.log('// Ejercicio 15 setTimeOut');
+
+const ex15Div = document.createElement("div");
+
+const ex15Parrafo = document.createElement('p');
+ex15Parrafo.textContent = 'Esperando mensaje...';
+
+const ex15Boton = document.createElement('button');
+ex15Boton.setAttribute('id', 'botonEx15');
+ex15Boton.textContent = 'Pulsa este boton para crear un mensaje con TimeOut...'
+
+
+ex15Div.appendChild(ex15Boton);
+ex15Div.appendChild(ex15Parrafo);
+anchorElement.appendChild(ex15Div);
+
+ex15Boton.addEventListener('click', () => { //crea escuchador de evento por click que
+  setTimeout(()=>{ // genera un timeout
+    ex15Parrafo.textContent = 'Mensaje TimeOut' // cambia mensaje de un parrafo
+  },3000) // cuando pase el tiempo indicado en ms
+});
+
+// Ejercicio 16 setInterval y clearInterval
+console.log('// Ejercicio 16 setInterval y clearInterval');
+
+const ex16Div = document.createElement("div");
+
+let ex16Contador = 0; // creamos un contador
+const ex16Parrafo = document.createElement('p');
+ex16Parrafo.textContent = `Contador: ${ex16Contador}`; // creamos un texto que muestre el contador
+
+const ex16Boton = document.createElement('button');
+ex16Boton.setAttribute('id', 'botonEx16');
+ex16Boton.textContent = 'Inicia Intervalo'; // boton que incia
+
+const ex16BotonReset = document.createElement('button');
+ex16BotonReset.setAttribute('id', 'botonEx16Reset');
+ex16BotonReset.textContent = 'Resetea intervalo'; // boton para el reset interval
+
+
+ex16Div.appendChild(ex16Boton);
+ex16Div.appendChild(ex16BotonReset);
+ex16Div.appendChild(ex16Parrafo);
+anchorElement.appendChild(ex16Div);
+
+let ex16Interval; //creamos una variable de intervalo, porque queremos acceder a el en dos eventlistener diferentes
+
+ex16Boton.addEventListener('click', ()=>{ // evento por click en boton intervalo
+  ex16Interval = setInterval(() => {// crea intervalo
+    ex16Contador += 1; // que suma 1 al contador
+    ex16Parrafo.textContent = `Contador: ${ex16Contador}`; //vuelve a mostrar el parrafo, si solo sumamos contador el parrafo no se actualiza
+  }, 1000)// cada segundo
+});
+
+ex16BotonReset.addEventListener('click', ()=> { //evento por click en boton clearinterval
+  clearInterval(ex16Interval); // clear interval del intervalo creado
+  ex16Contador = 0; // resetea el contador a cero
+  ex16Parrafo.textContent = `Contador: ${ex16Contador}`; //Refresca el parrafo para mostrar el reseteo
+});
+
+
+//Ejercicio 17 Capturar valores de formulario
+console.log('//Ejercicio 17 Capturar valores de formulario');
+
+//div and form
+const ex17Div = document.createElement('div');
+const ex17Form = document.createElement('form');
+ex17Form.setAttribute('id', 'form17');
+
+//name
+const ex17LabelName = document.createElement('label');
+ex17LabelName.setAttribute('for', 'ex17Name');
+ex17LabelName.textContent = 'Name: ';
+const ex17InputName = document.createElement('input');
+ex17InputName.setAttribute('type', 'text');
+ex17InputName.setAttribute('id', 'ex17Name');
+ex17InputName.setAttribute('name', 'ex17Name');
+ex17InputName.setAttribute('placeholder', 'Your name');
+
+//address
+const ex17LabelAddress = document.createElement('label');
+ex17LabelAddress.setAttribute('for', 'ex17Address');
+ex17LabelAddress.textContent = 'Address: ';
+const ex17InputAddress = document.createElement('input');
+ex17InputAddress.setAttribute('type', 'text');
+ex17InputAddress.setAttribute('id', 'ex17Address');
+ex17InputAddress.setAttribute('name', 'ex17Address');
+ex17InputAddress.setAttribute('placeholder', 'Your address');
+
+//email
+const ex17LabelEmail = document.createElement('label');
+ex17LabelEmail.setAttribute('for', 'ex17Email');
+ex17LabelEmail.textContent = 'E-mail: ';
+const ex17InputEmail = document.createElement('input');
+ex17InputEmail.setAttribute('type', 'email');
+ex17InputEmail.setAttribute('id', 'ex17Email');
+ex17InputEmail.setAttribute('name', 'ex17Email');
+ex17InputEmail.setAttribute('placeholder', 'Your@email.address');
+
+//age
+const ex17LabelAge = document.createElement('label');
+ex17LabelAge.setAttribute('for', 'ex17Age');
+ex17LabelAge.textContent = 'Age: ';
+const ex17InputAge = document.createElement('input');
+ex17InputAge.setAttribute('type', 'number');
+ex17InputAge.setAttribute('id', 'ex17Age');
+ex17InputAge.setAttribute('name', 'ex17Age');
+ex17InputAge.setAttribute('placeholder', 'Your age');
+
+//submit
+const ex17ButtonSubmit = document.createElement('button');
+ex17ButtonSubmit.setAttribute('type', 'submit');
+ex17ButtonSubmit.textContent = 'Send data';
+
+//appendss!
+
+ex17Form.appendChild(ex17LabelName);
+ex17Form.appendChild(ex17InputName);
+ex17Form.appendChild(ex17LabelAddress);
+ex17Form.appendChild(ex17InputAddress);
+ex17Form.appendChild(ex17LabelEmail);
+ex17Form.appendChild(ex17InputEmail);
+ex17Form.appendChild(ex17LabelAge);
+ex17Form.appendChild(ex17InputAge);
+ex17Form.appendChild(ex17ButtonSubmit);
+
+ex17Div.appendChild(ex17Form);
+
+anchorElement.appendChild(ex17Div);
+
+ex17Form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  ex18Validation();
+
+  if (errors.length === 0) {
+  console.log(ex17InputName.value);
+  console.log(ex17InputAddress.value);
+  console.log(ex17InputEmail.value);
+  console.log(ex17InputAge.value);
+  }
+  else {
+    ex18ValidationBox.innerHTML = errors.join('<br>');
+    ex17Div.appendChild(ex18ValidationBox);
+    setTimeout(() => {
+      if (ex17Div.contains(ex18ValidationBox)) {
+        ex17Div.removeChild(ex18ValidationBox);
+      }
+    }, 3000);
+  }
+})
+
+//Ejercicio 18 — Validación básica
+console.log('Ejercicio 18 — Validación básica');
+
+const ex18ValidationBox = document.createElement('div');
+ex18ValidationBox.className = 'validation-box';
+
+const errors = [];
+function ex18Validation() {
+  errors.length = 0;
+  if (!ex17InputName.value.trim()) {
+    errors.push("Name can't be empty");
+  }
+  if (ex17InputAddress.value.trim().length < 10) {
+    errors.push("Address must have minimum 10 characters");
+  }
+  if (!ex17InputEmail.value.includes('@')) {
+    errors.push('Email must have @ symbol');
+  }
+  if (!ex17InputAge.value || Number(ex17InputAge.value) < 18) {
+    errors.push('Age must be filled and be at least 18');
+  }
+
+}
+
+
+//Extra18
+
+/* Crea un pequeño programa en JavaScript (puede ejecutarse en consola, como en Node.js o desde el inspector del navegador) que permita:
+
+Guardar tareas en una lista (array).
+
+Mostrar todas las tareas.
+
+Marcar una tarea como completada.
+
+Eliminar una tarea.
+
+Salir del programa.
+
+No necesitas usar HTML, solo console.log(), prompt() o readline (si estás en Node.js).*/
+
+/*
+
+const Ext18Jobs = [];
+
+let selectedProgram = 0;
+do {
+  listProgram();
+}
+while (!selectedProgram === 5);
+
+function listProgram(num) {
+  prompt();
+}
+
+*/
+
+//Ejercicio 19 fetchGET basico
+
+fetch('https://jsonplaceholder.typicode.com/users')
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  return res.json();
+})
+.then(data => {
+  const datosProcesados = JSON.stringify(data.map(user => user.name));
+  console.log('Lista de usuarios: ', datosProcesados);
+
+})
+.catch(err => {
+  console.error(err.message);
+});
+
+//Ejercicio 20
+
+fetch('https://jsonplaceholder.typicode.com/useers')
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  return res.json();
+})
+.then(data => {
+  const datosProcesados = JSON.stringify(data.map(user => user.name));
+  console.log('Lista de usuarios: ', datosProcesados);
+})
+.catch(err => {
+  console.error(err.message);
+});
+
+//Ejercicio 21
+
+const datos21 = {
+    "userId": 1,
+    "title": "No tengo ni idea de lo que pasa",
+    "body": "Imagina que en realidad no entiendo nada..."
+  }
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: {
+    'Content-type': 'application/json',
+  },
+  body: JSON.stringify(datos21),
+}
+)
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  return res.json();
+})
+.then(data => {
+  console.log('Post realizado: ', data);
+})
+.catch(err => {
+  console.error(err.message);
+});
+
+//Ejercicio 22
+
+const datos22 = {
+    "userId": 5,
+    "id": 5,
+    "title": "Er javaescri",
+    "body": "e pa zuperdotao de ezo... loh frikii"
+  }
+
+fetch('https://jsonplaceholder.typicode.com/posts/5', {
+  method: 'PUT',
+  headers: {
+    'Content-type': 'application/json',
+  },
+  body: JSON.stringify(datos22),
+}
+)
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  return res.json();
+})
+.then(data => {
+  console.log(data);
+})
+.catch(err => {
+  console.error(err.message);
+});
+
+//Ejercicio 23 patch
+
+const datos23 = {
+    "title": "Er javaescri",
+  }
+
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  method: 'PATCH',
+  headers: {
+    'Content-type': 'application/json',
+  },
+  body: JSON.stringify(datos23),
+}
+)
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  return res.json();
+})
+.then(data => {
+  console.log(data);
+})
+.catch(err => {
+  console.error(err.message);
+});
+
+// Ejercicio 24 DELETE
+
+
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  method: 'DELETE',
+  headers: {
+    'Content-type': 'application/json',
+  },
+}
+)
+.then(res => {
+  if (!res.ok){
+    throw new Error (`Error ${res.status}`);
+  }
+  console.log(res.status);
+  return res.json();
+})
+.catch(err => {
+  console.error(err.message);
+});
+
