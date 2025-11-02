@@ -534,38 +534,6 @@ function ex18Validation() {
 }
 
 
-//Extra18
-
-/* Crea un pequeño programa en JavaScript (puede ejecutarse en consola, como en Node.js o desde el inspector del navegador) que permita:
-
-Guardar tareas en una lista (array).
-
-Mostrar todas las tareas.
-
-Marcar una tarea como completada.
-
-Eliminar una tarea.
-
-Salir del programa.
-
-No necesitas usar HTML, solo console.log(), prompt() o readline (si estás en Node.js).*/
-
-/*
-
-const Ext18Jobs = [];
-
-let selectedProgram = 0;
-do {
-  listProgram();
-}
-while (!selectedProgram === 5);
-
-function listProgram(num) {
-  prompt();
-}
-
-*/
-
 //Ejercicio 19 fetchGET basico
 
 fetch('https://jsonplaceholder.typicode.com/users')
@@ -788,7 +756,7 @@ async function ex29PATCH() {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json',
-        accept: 'application/json',
+        accept: 'text/txt',
       },
       body: JSON.stringify({
         body: 'testing new body using PATCH',
@@ -823,3 +791,110 @@ async function ex30DELETE() {
 
 ex30DELETE();
 
+//Ejercicio 31 Local storage... Crea input intruduce nombre - boton que ejecuta accion con contendido que ponga guardar.
+//guarda valor en local, recupera al recargar pagina.
+
+//div and form
+const ex31Div = document.createElement('div');
+const ex31Form = document.createElement('form');
+ex31Form.setAttribute('id', 'form31');
+
+//name
+const ex31LabelName = document.createElement('label');
+ex31LabelName.setAttribute('for', 'ex31Name');
+ex31LabelName.textContent = 'Nombre: ';
+const ex31InputName = document.createElement('input');
+ex31InputName.setAttribute('type', 'text');
+ex31InputName.setAttribute('id', 'ex31Name');
+ex31InputName.setAttribute('name', 'ex31Name');
+ex31InputName.setAttribute('placeholder', 'Introduce un nombre');
+
+const ex31ButtonSubmit = document.createElement('button');
+ex31ButtonSubmit.setAttribute('type', 'submit');
+ex31ButtonSubmit.textContent = 'Guardar';
+
+//Appends!!!
+
+anchorElement.appendChild(ex31Div);
+ex31Div.appendChild(ex31Form);
+ex31Div.appendChild(ex31LabelName);
+ex31Div.appendChild(ex31InputName);
+ex31Div.appendChild(ex31ButtonSubmit);
+
+const ex31DataDiv = document.createElement('div');
+ex31DataDiv.textContent = 'Nombre registrado';
+ex31Div.appendChild(ex31DataDiv);
+
+ex31ButtonSubmit.addEventListener('click', event => {
+  event.preventDefault();
+  const nombrePuesto = ex31InputName.value;
+  localStorage.setItem('userName', nombrePuesto);
+  comprobarLocal();
+})
+
+async function comprobarLocal () {
+  if (typeof localStorage !== undefined) {
+    if (!localStorage.getItem('userName'))
+    ex31DataDiv.textContent = 'No hay usuario todavia';
+    else {
+      ex31DataDiv.textContent = `El usuario es: ${localStorage.getItem('userName')}`;
+    }
+    
+  }
+}
+
+comprobarLocal();
+
+//ejercicio 32 lo mismo con session storage
+
+//div and form
+const ex32Div = document.createElement('div');
+const ex32Form = document.createElement('form');
+ex32Form.setAttribute('id', 'form32');
+
+//name
+const ex32LabelName = document.createElement('label');
+ex32LabelName.setAttribute('for', 'ex32Name');
+ex32LabelName.textContent = 'Nombre: ';
+const ex32InputName = document.createElement('input');
+ex32InputName.setAttribute('type', 'text');
+ex32InputName.setAttribute('id', 'ex32Name');
+ex32InputName.setAttribute('name', 'ex32Name');
+ex32InputName.setAttribute('placeholder', 'Introduce un nombre');
+
+const ex32ButtonSubmit = document.createElement('button');
+ex32ButtonSubmit.setAttribute('type', 'submit');
+ex32ButtonSubmit.textContent = 'Guardar';
+
+//Appends!!!
+
+anchorElement.appendChild(ex32Div);
+ex32Div.appendChild(ex32ButtonSubmit);
+ex32Div.appendChild(ex32Form);
+ex32Div.appendChild(ex32LabelName);
+ex32Div.appendChild(ex32InputName);
+
+const ex32DataDiv = document.createElement('div');
+ex32DataDiv.textContent = 'Nombre registrado en session';
+ex32Div.appendChild(ex32DataDiv);
+
+ex32ButtonSubmit.addEventListener('click', event => {
+  event.preventDefault();
+  const nombrePuesto = ex32InputName.value;
+  sessionStorage.setItem('userName', nombrePuesto);
+  comprobarSession();
+})
+
+async function comprobarSession () {
+  if (typeof sessionStorage !== undefined) {
+      if (!sessionStorage.getItem('userName')) {
+    ex32DataDiv.textContent = 'No hay usuario todavia';
+      }
+      else {
+      ex32DataDiv.textContent = `El usuario es: ${sessionStorage.getItem('userName')}`;
+    }
+  
+}
+}
+
+comprobarSession();
